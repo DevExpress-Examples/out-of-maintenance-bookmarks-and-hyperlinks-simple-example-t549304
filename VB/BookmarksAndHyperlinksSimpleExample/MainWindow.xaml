@@ -1,0 +1,77 @@
+﻿<Window x:Class="BookmarksAndHyperlinksSimpleExample.MainWindow" mc:Ignorable="d" Height="350" Width="525" 
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+                    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:local="clr-namespace:BookmarksAndHyperlinksSimpleExample" 
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking" 
+    xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit" Loaded="Window_Loaded">
+
+    <Grid>
+        <dxdo:DockLayoutManager>
+            <dxdo:LayoutGroup Orientation="Horizontal">
+                <dxdo:LayoutPanel Caption="Panel1" ItemWidth="150">
+                    <StackPanel Orientation="Vertical">
+                        <dx:GroupFrame>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <dxe:CheckEdit x:Name="edtShowBookmarks" Content="Show bookmarks" IsChecked="True" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="0"/>
+                                <TextBlock Text="Bookmark color:" Margin="0,6,0,3" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1"/>
+                                <dxe:PopupColorEdit x:Name="colorEdit1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,3,0,0" Grid.Row="2" Color="SteelBlue">
+                                </dxe:PopupColorEdit>
+                            </Grid>
+                        </dx:GroupFrame>
+                        <dx:GroupFrame Header="Hyperlinks" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <dxe:CheckEdit x:Name="edtShowTooltip" Content="Show tooltip" IsChecked="True" Grid.Row="0" />
+                                <TextBlock Text="Modifier keys:" Margin="0,3,0,3" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" />
+                                <Grid Grid.Row="2" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <dxe:CheckEdit x:Name="edtCtrl" Content="Ctrl" IsChecked="True" Grid.Row="2" Grid.Column="0" Margin="0,0,3,0"></dxe:CheckEdit>
+                                    <dxe:CheckEdit x:Name="edtAlt" Content="Alt" IsChecked="False" Grid.Row="2" Grid.Column="1" Margin="3,0,3,0"></dxe:CheckEdit>
+                                    <dxe:CheckEdit x:Name="edtShift" Content="Shift" IsChecked="False" Grid.Row="2" Grid.Column="2" Margin="3,0,3,0"></dxe:CheckEdit>
+                                </Grid>
+                            </Grid>
+                        </dx:GroupFrame>
+                    </StackPanel>
+                </dxdo:LayoutPanel>
+
+                <dxdo:LayoutPanel ShowCaption="False">
+                    <dxre:RichEditControl x:Name="richEdit" HorizontalAlignment="Stretch" Margin="0" ShowBorder="False" VerticalAlignment="Stretch" CommandBarStyle="Empty">
+                        <!--region #bookmarkoptions-->
+                        <dxre:RichEditControl.BookmarkOptions>
+                            <dxre:DXRichEditBookmarkOptions Color="{Binding Color, ElementName=colorEdit1}"
+                                                Visibility="{DXBinding '@e(edtShowBookmarks).IsChecked ? $dxre:RichEditBookmarkVisibility.Visible : $dxre:RichEditBookmarkVisibility.Hidden'}"/>
+                        </dxre:RichEditControl.BookmarkOptions>
+                        <!--endregion-->
+                        
+                        <!--region #hyperlinkoptions-->
+                        <dxre:RichEditControl.HyperlinkOptions>
+                            <dxre:DXRichEditHyperlinkOptions ShowToolTip="{Binding IsChecked, ElementName=edtShowTooltip}"
+                                                 ModifierKeys="{DXBinding '$local:KeysToModifierKeysConverter.ToModifierKeys(@e(edtCtrl).IsChecked, @e(edtAlt).IsChecked, @e(edtShift).IsChecked)'}"/>
+                        </dxre:RichEditControl.HyperlinkOptions>
+                        <!--endregion-->
+                    </dxre:RichEditControl>
+                </dxdo:LayoutPanel>
+            </dxdo:LayoutGroup>
+        </dxdo:DockLayoutManager>
+
+    </Grid>
+</Window>
