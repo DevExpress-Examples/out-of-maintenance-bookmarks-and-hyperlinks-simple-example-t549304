@@ -1,4 +1,4 @@
-﻿<Window x:Class="BookmarksAndHyperlinksSimpleExample.MainWindow" mc:Ignorable="d" Height="350" Width="525" 
+<Window x:Class="BookmarksAndHyperlinksSimpleExample.MainWindow" mc:Ignorable="d" Height="350" Width="525" 
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
                     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
