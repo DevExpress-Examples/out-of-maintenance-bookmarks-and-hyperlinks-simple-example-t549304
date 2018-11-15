@@ -1,3 +1,9 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [MainWindow.xaml](./CS/BookmarksAndHyperlinksSimpleExample/MainWindow.xaml) (VB: [MainWindow.xaml.vb](./VB/BookmarksAndHyperlinksSimpleExample/MainWindow.xaml.vb))
+* [MainWindow.xaml.cs](./CS/BookmarksAndHyperlinksSimpleExample/MainWindow.xaml.cs) (VB: [MainWindow.xaml.vb](./VB/BookmarksAndHyperlinksSimpleExample/MainWindow.xaml.vb))
+<!-- default file list end -->
 # Bookmarks and Hyperlinks Simple Example
 
 
